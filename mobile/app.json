@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Höjlogg",
+    "slug": "hojlogg-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0f0f1a"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Camera is used to scan your motorcycle dashboard.",
+        "NSPhotoLibraryUsageDescription": "Photo library access is used to attach dashboard photos to log entries."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f0f1a"
+      },
+      "permissions": ["CAMERA", "READ_MEDIA_IMAGES"],
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Höjlogg to access your camera to scan the motorcycle dashboard."
+        }
+      ]
+    ]
+  }
+}

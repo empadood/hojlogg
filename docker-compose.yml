@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: hojlogg
+      POSTGRES_USER: hojlogg
+      POSTGRES_PASSWORD: hojlogg
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hojlogg"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://hojlogg:hojlogg@db:5432/hojlogg
+      UPLOAD_DIR: /app/uploads
+      ADDR: ":8080"
+    volumes:
+      - uploads:/app/uploads
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:
+  uploads:
